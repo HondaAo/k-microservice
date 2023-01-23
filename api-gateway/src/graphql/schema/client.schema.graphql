@@ -1,0 +1,23 @@
+type Client {
+  clientId: ID!
+  clientName: String!
+  email: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+input SignupClientInput {
+  name: String!
+  email: String!
+  password: String!
+}
+
+input LoginClientInput {
+  email: String!
+  password: String!
+}
+
+type ClientPayload {
+  errors: [ErrorPayload]
+  client: Client
+}

@@ -1,0 +1,28 @@
+type Employee {
+  clientId: ID!
+  employeeId: ID!
+  email: String!
+  employeeCode: String!
+  jobCategoryId: Int!
+  departmentId: Int!
+  startDate: DateTime!
+  retirementDate: DateTime!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+input SignupEmployeeInput {
+  name: String!
+  email: String!
+  password: String!
+}
+
+input LoginEmployeeInput {
+  email: String!
+  password: String!
+}
+
+type EmployeePayload {
+  errors: [ErrorPayload]
+  employee: Employee
+}
