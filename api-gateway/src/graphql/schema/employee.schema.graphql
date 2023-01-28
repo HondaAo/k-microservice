@@ -11,13 +11,23 @@ type Employee {
   updatedAt: DateTime!
 }
 
+input CreateInputEmployee {
+  email: String!
+  employeeCode: String!
+  jobCategoryId: Int!
+  departmentId: Int!
+  startDate: DateTime! 
+}
+
 input SignupEmployeeInput {
+  clientId: String!
   name: String!
   email: String!
   password: String!
 }
 
 input LoginEmployeeInput {
+  clientId: String!
   email: String!
   password: String!
 }

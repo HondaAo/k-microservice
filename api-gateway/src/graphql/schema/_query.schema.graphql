@@ -1,0 +1,7 @@
+type Query {
+  client(clientId: ID!): Client!
+  clients(clientId: ID!): [Client!]!
+  me: Client!
+
+  employee(clientId: ID!, employeeId: ID!): Employee!
+}

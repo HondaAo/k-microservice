@@ -1,0 +1,9 @@
+type Mutation {
+  clientSignup(data: SignupClientInput!): ClientPayload!
+  clientLogin(data: LoginClientInput!): ClientPayload!
+  clientLogout: Boolean!
+  
+  updateClient(data: UpdateClientInput): ClientPayload!
+
+  createEmployee(data: CreateInputEmployee!): Employee!
+}

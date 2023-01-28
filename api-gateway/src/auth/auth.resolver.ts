@@ -57,7 +57,7 @@ export class AuthResolver implements OnModuleInit {
     const client = await this.clientsService.findByEmail({ email: input.email }).toPromise()
     if (isEmpty(client)) throw new Error('Unable to Login')
 
-    const isSame: boolean = await this.passwordUtils.compare(input.password, client)
+    const isSame: boolean = await this.passwordUtils.compare(input.password, client.password)
     if (!isSame) throw new Error('Wrong Password')
 
     res.cookie('access-token', await this.authService.generateAccessToken(client), {

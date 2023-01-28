@@ -1,0 +1,54 @@
+syntax = "proto3";
+
+package employee;
+
+option go_package = "api/grpc";
+
+import "proto/commons.proto";
+
+message Employee {
+  string clientId = 1;
+  uint64 employeeId = 2;
+  string employeeCode = 3;
+  uint64 jobCategoryId = 4;
+  uint64 departmentId = 5;
+  string startDate = 6;
+  string retirementDate = 7;
+  string createdAt = 8;
+  string updatedAt = 9;
+}
+
+message CreateEmployeeInput {
+  string clientId = 1;
+  string employeeCode = 2;
+  uint64 jobCategoryId = 3;
+  uint64 departmentId = 4;
+  string startDate = 5;
+}
+ 
+message UpdateEmployeeInput {
+  string clientId = 1;
+  uint64 employeeId = 2;
+  string employeeCode = 3;
+  uint64 jobCategoryId = 4;
+  uint64 departmentId = 5;
+  string startDate = 6;
+  string retirementDate = 7;
+}
+
+message FindByIdRequest {
+  string clientId = 1;
+  uint64 employeeId = 2;
+}
+
+message FindEmployeesPayload {
+  repeated Employee employees = 1;
+  commons.PageInfo pager = 2;
+}
+
+service EmployeesService {
+  rpc findById (FindByIdRequest) returns (Employee) {}
+  rpc find (commons.Query) returns (FindEmployeesPayload) {}
+  rpc create(CreateEmployeeInput) returns (Employee) {}
+  rpc update(UpdateEmployeeInput) returns (Employee) {}
+}

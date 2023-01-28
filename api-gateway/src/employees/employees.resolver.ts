@@ -24,7 +24,7 @@ export class EmployeesResolver implements OnModuleInit {
     this.employeesService = this.employeesServiceClient.getService<IEmployeeService>('EmployeesService')
   }
 
-  @Query('employees')
+  @Query('employee')
   async getEmployee(
     @Args('client_id') clientId: string,
     @Args('employee_id') employeeId: number

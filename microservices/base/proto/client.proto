@@ -1,0 +1,51 @@
+syntax = "proto3";
+
+package client;
+
+option go_package = "api/grpc";
+
+message Client {
+  string clientId = 1;
+  string clientName = 2;
+  string email = 3;
+  bool isUsed = 4;
+  string createdAt = 5;
+  string updatedAt = 6;
+}
+
+message CreateClientInput {
+  string clientName = 1;
+  string email = 2;
+  string password = 3;
+}
+
+message CreateClientResponse {
+    int64 status = 1;
+    string error = 2;
+    string clientId = 3;
+}
+
+message FindClientRequest {
+  string clientId = 1;
+}
+
+message FindByEmailRequest {
+  string email = 1;
+}
+
+message UpdateClientInput {
+  string clientId = 1;
+  Client input = 2;
+}
+
+message FindClientResponse {
+  Client data = 1;
+  string error = 2;
+}
+
+service ClientsService {
+  rpc findOne (FindClientRequest) returns (FindClientResponse) {}
+  rpc findByEmail (FindByEmailRequest) returns (FindClientResponse) {}
+  rpc create (CreateClientInput) returns (CreateClientResponse) {}
+  rpc update (UpdateClientInput) returns (CreateClientResponse) {}
+}

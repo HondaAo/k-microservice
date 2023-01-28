@@ -19,21 +19,45 @@ export interface LoginClientInput {
     password: string;
 }
 
+export interface CreateInputEmployee {
+    email: string;
+    employeeCode: string;
+    jobCategoryId: number;
+    departmentId: number;
+    startDate: DateTime;
+}
+
 export interface SignupEmployeeInput {
+    clientId: string;
     name: string;
     email: string;
     password: string;
 }
 
 export interface LoginEmployeeInput {
+    clientId: string;
     email: string;
     password: string;
+}
+
+export interface IMutation {
+    clientSignup(data: SignupClientInput): ClientPayload | Promise<ClientPayload>;
+    clientLogin(data: LoginClientInput): ClientPayload | Promise<ClientPayload>;
+    clientLogout(): boolean | Promise<boolean>;
+    createEmployee(data: CreateInputEmployee): Employee | Promise<Employee>;
+}
+
+export interface IQuery {
+    client(clientId: string): Client | Promise<Client>;
+    me(): Client | Promise<Client>;
 }
 
 export interface Client {
     clientId: string;
     clientName: string;
     email: string;
+    password: string;
+    isUsed: boolean;
     createdAt: DateTime;
     updatedAt: DateTime;
 }

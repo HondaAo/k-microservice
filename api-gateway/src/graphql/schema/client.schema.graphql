@@ -2,6 +2,8 @@ type Client {
   clientId: ID!
   clientName: String!
   email: String!
+  password: String!
+  isUsed: Boolean!
   createdAt: DateTime!
   updatedAt: DateTime!
 }
@@ -20,4 +22,12 @@ input LoginClientInput {
 type ClientPayload {
   errors: [ErrorPayload]
   client: Client
+}
+
+input UpdateClientInput {
+  clientId: ID!
+  clientName: String!
+  email: String!
+  password: String!
+  isUsed: Boolean! 
 }

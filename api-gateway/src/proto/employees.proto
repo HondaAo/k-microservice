@@ -1,0 +1,71 @@
+syntax = "proto3";
+
+package employees;
+
+message Employee {
+  string clientId = 1;
+  uint64 employeeId = 2;
+  string employeeCode = 3;
+  uint64 jobCategoryId = 4;
+  uint64 departmentId = 5;
+  string startDate = 6;
+  string retirementDate = 7;
+  string createdAt = 8;
+  string updatedAt = 9;
+}
+
+message CreateEmployeeInput {
+  string clientId = 1;
+  string employeeCode = 2;
+  uint64 jobCategoryId = 3;
+  uint64 departmentId = 4;
+  string startDate = 5;
+}
+ 
+message UpdateEmployeeInput {
+  string clientId = 1;
+  uint64 employeeId = 2;
+  string employeeCode = 3;
+  uint64 jobCategoryId = 4;
+  uint64 departmentId = 5;
+  string startDate = 6;
+  string retirementDate = 7;
+}
+
+message FindByIdRequest {
+  string clientId = 1;
+  uint64 employeeId = 2;
+}
+
+message FindByIdResponse {
+  Employee employee = 1;
+  string error = 2;
+  uint64 status = 3;
+}
+
+message FindEmployeesPayload {
+  repeated Employee employees = 1;
+  string error = 2;
+}
+
+message CreateEmployeeResponse {
+  uint64 status = 1;
+  string error = 2;
+  uint64 employeeId = 3;
+}
+
+message Query {
+  repeated string select = 1;
+  string where = 2;
+  repeated string orderBy = 3;
+  int32 limit = 4;
+  string before = 5;
+  string after = 6;
+}
+
+service EmployeesService {
+  rpc findById (FindByIdRequest) returns (FindByIdResponse) {}
+  rpc find (Query) returns (FindEmployeesPayload) {}
+  rpc create(CreateEmployeeInput) returns (CreateEmployeeResponse) {}
+  rpc update(UpdateEmployeeInput) returns (CreateEmployeeResponse) {}
+}
