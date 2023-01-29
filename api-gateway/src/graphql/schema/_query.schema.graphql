@@ -4,4 +4,7 @@ type Query {
   me: Client!
 
   employee(clientId: ID!, employeeId: ID!): Employee!
+  employees(q: String, offset: Int!, limit: Int!, filterBy: JSONObject, orderBy: String): [Employee!]!
+
+  stamps(q: String, offset: Int!, limit: Int!, filterBy: JSONObject, orderBy: String): [Stamp!]!
 }

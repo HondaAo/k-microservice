@@ -1,17 +1,13 @@
-FROM node:12-alpine as build
+FROM node:14-alpine as build
 
-WORKDIR /usr/share/api-gateway
+WORKDIR /app/api-gateway
 
-COPY dist package.json ./
+COPY dist package.json /app/api-gateway/
 
-RUN npm install --production
+RUN yarn install --production
 
-FROM node:12-alpine
-
-WORKDIR /usr/share/api-gateway
-
-COPY --from=build /usr/share/api-gateway .
+COPY . .
 
 EXPOSE 4000
 
-CMD ["node", "main.js"]
+CMD ["node", "dist/main"]

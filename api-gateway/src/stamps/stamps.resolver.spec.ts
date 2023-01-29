@@ -1,5 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { StampingsResolver } from './stampings.resolver';
+import { StampingsResolver } from './stamps.resolver';
 
 describe('StampingsResolver', () => {
   let resolver: StampingsResolver;

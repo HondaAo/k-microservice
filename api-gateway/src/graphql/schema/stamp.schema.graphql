@@ -1,0 +1,22 @@
+type Stamp {
+  clientId: ID!
+  employeeId: ID!
+  date: DateTime!
+  minutes: Int!
+  stampType: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+input StampInput {
+  clientId: ID!
+  employeeId: ID!
+  date: DateTime!
+  minutes: Int!
+  stampType: String!
+}
+
+type StampPayload {
+  error: [ErrorPayload]
+  stamp: Stamp
+}

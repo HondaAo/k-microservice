@@ -4,11 +4,10 @@ export interface IId {
   
   export interface IQuery {
     select?: string[]
-    where?: string
+    where?: any
     orderBy?: string[]
     limit?: number
-    before?: string
-    after?: string
+    offset?: number
   }
   
   export interface ICount {

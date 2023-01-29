@@ -4,6 +4,7 @@ import (
 	"context"
 	"net/http"
 
+	"github.com/HondaAo/bff/microservices/base/pkg/config"
 	"github.com/HondaAo/bff/microservices/base/pkg/db"
 	"github.com/HondaAo/bff/microservices/base/pkg/models"
 
@@ -24,6 +25,7 @@ func (s ClientServer) Create(ctx context.Context, req *pb.CreateClientInput) (*p
 	}
 
 	if result := s.H.DB.Create(client); result.Error != nil {
+		config.New().Error(config.ServerError, "DB INSERT Error")
 		return &pb.CreateClientResponse{
 			Status: http.StatusBadRequest,
 			Error:  result.Error.Error(),

@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
-import { StampingsService } from './stampings.service';
-import { StampingsResolver } from './stampings.resolver';
+import { StampingsService } from './stamps.service';
+import { StampingsResolver } from './stamps.resolver';
 
 @Module({
   providers: [StampingsService, StampingsResolver]

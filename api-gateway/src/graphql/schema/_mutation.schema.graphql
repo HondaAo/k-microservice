@@ -6,4 +6,6 @@ type Mutation {
   updateClient(data: UpdateClientInput): ClientPayload!
 
   createEmployee(data: CreateInputEmployee!): Employee!
+
+  stamp(data: StampInput!): StampPayload!
 }

@@ -1,21 +1,30 @@
 package config
 
-import "github.com/spf13/viper"
+import (
+	"log"
+
+	"github.com/spf13/viper"
+)
 
 type Env struct {
 	Port  string `mapstructure:"PORT"`
 	DBUrl string `mapstructure:"DB_URL"`
 }
 
-func SetEnv() (Env, error) {
-	viper.AddConfigPath("./config")
-	viper.SetConfigFile(".env")
+func SetEnv() (env Env, err error) {
+	viper.AddConfigPath("./pkg/config")
+	viper.SetConfigName("local")
+	viper.SetConfigType("env")
 
 	viper.ReadInConfig()
 
-	env := Env{
-		Port:  viper.GetString("PORT"),
-		DBUrl: viper.GetString("DB_URL"),
+	if err := viper.ReadInConfig(); err != nil {
+		log.Fatal("Error reading env file", err)
+	}
+
+	// Viper unmarshals the loaded env varialbes into the struct
+	if err := viper.Unmarshal(&env); err != nil {
+		log.Fatal(err)
 	}
 
 	return env, nil

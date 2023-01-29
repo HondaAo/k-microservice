@@ -1,0 +1,6 @@
+CREATE DATABASE base-svc;
+
+USE base-svc;
+
+CREATE USER 'root'@'%' IDENTIFIED BY 'root';
+GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' WITH GRANT OPTION;
