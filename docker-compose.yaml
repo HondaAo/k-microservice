@@ -1,15 +1,15 @@
 version: '3'
 
 services:
-  base-svc:
-    container_name: base-svc
+  base_svc:
+    container_name: base_svc
     build:
       context: './microservices/base'
     environment:
       MYSQL_HOST: db 
       MYSQL_USER: root
-      MYSQL_PASSWORD: root
-      MYSQL_DB: base-svc
+      MYSQL_PASSWORD: secret
+      MYSQL_DB: base_svc
     ports:
       - "8080:8080"
     depends_on:
@@ -20,14 +20,18 @@ services:
     ports:
       - "4000:4000"
     depends_on:
-      - "base-svc"
+      - "base_svc"
     restart: "on-failure"
   db:
     image: mysql:5.7
     ports:
       - "3306:3306"
     environment:
-      MYSQL_ROOT_PASSWORD: root
+      MYSQL_ROOT_USER: root
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_DATABASE: base_svc
+      MYSQL_USER: root
+      MYSQL_PASSWORD: secret
     volumes:
       - mysql-data:/var/lib/mysql
       - ./scripts/db:/docker-entrypoint-initdb.d

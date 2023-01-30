@@ -57,7 +57,7 @@ message CreateEmployeeResponse {
 message Query {
   repeated string select = 1;
   string where = 2;
-  repeated string orderBy = 3;
+  string orderBy = 3;
   int32 limit = 4;
   string before = 5;
   string after = 6;

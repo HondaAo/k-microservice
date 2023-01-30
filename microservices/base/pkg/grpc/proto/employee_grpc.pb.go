@@ -22,10 +22,10 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type EmployeesServiceClient interface {
-	FindById(ctx context.Context, in *FindByIdRequest, opts ...grpc.CallOption) (*Employee, error)
+	FindById(ctx context.Context, in *FindByIdRequest, opts ...grpc.CallOption) (*FindByIdResponse, error)
 	Find(ctx context.Context, in *Query, opts ...grpc.CallOption) (*FindEmployeesPayload, error)
-	Create(ctx context.Context, in *CreateEmployeeInput, opts ...grpc.CallOption) (*Employee, error)
-	Update(ctx context.Context, in *UpdateEmployeeInput, opts ...grpc.CallOption) (*Employee, error)
+	Create(ctx context.Context, in *CreateEmployeeInput, opts ...grpc.CallOption) (*CreateEmployeeResponse, error)
+	Update(ctx context.Context, in *UpdateEmployeeInput, opts ...grpc.CallOption) (*CreateEmployeeResponse, error)
 }
 
 type employeesServiceClient struct {
@@ -36,8 +36,8 @@ func NewEmployeesServiceClient(cc grpc.ClientConnInterface) EmployeesServiceClie
 	return &employeesServiceClient{cc}
 }
 
-func (c *employeesServiceClient) FindById(ctx context.Context, in *FindByIdRequest, opts ...grpc.CallOption) (*Employee, error) {
-	out := new(Employee)
+func (c *employeesServiceClient) FindById(ctx context.Context, in *FindByIdRequest, opts ...grpc.CallOption) (*FindByIdResponse, error) {
+	out := new(FindByIdResponse)
 	err := c.cc.Invoke(ctx, "/employee.EmployeesService/findById", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -54,8 +54,8 @@ func (c *employeesServiceClient) Find(ctx context.Context, in *Query, opts ...gr
 	return out, nil
 }
 
-func (c *employeesServiceClient) Create(ctx context.Context, in *CreateEmployeeInput, opts ...grpc.CallOption) (*Employee, error) {
-	out := new(Employee)
+func (c *employeesServiceClient) Create(ctx context.Context, in *CreateEmployeeInput, opts ...grpc.CallOption) (*CreateEmployeeResponse, error) {
+	out := new(CreateEmployeeResponse)
 	err := c.cc.Invoke(ctx, "/employee.EmployeesService/create", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -63,8 +63,8 @@ func (c *employeesServiceClient) Create(ctx context.Context, in *CreateEmployeeI
 	return out, nil
 }
 
-func (c *employeesServiceClient) Update(ctx context.Context, in *UpdateEmployeeInput, opts ...grpc.CallOption) (*Employee, error) {
-	out := new(Employee)
+func (c *employeesServiceClient) Update(ctx context.Context, in *UpdateEmployeeInput, opts ...grpc.CallOption) (*CreateEmployeeResponse, error) {
+	out := new(CreateEmployeeResponse)
 	err := c.cc.Invoke(ctx, "/employee.EmployeesService/update", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -76,10 +76,10 @@ func (c *employeesServiceClient) Update(ctx context.Context, in *UpdateEmployeeI
 // All implementations must embed UnimplementedEmployeesServiceServer
 // for forward compatibility
 type EmployeesServiceServer interface {
-	FindById(context.Context, *FindByIdRequest) (*Employee, error)
+	FindById(context.Context, *FindByIdRequest) (*FindByIdResponse, error)
 	Find(context.Context, *Query) (*FindEmployeesPayload, error)
-	Create(context.Context, *CreateEmployeeInput) (*Employee, error)
-	Update(context.Context, *UpdateEmployeeInput) (*Employee, error)
+	Create(context.Context, *CreateEmployeeInput) (*CreateEmployeeResponse, error)
+	Update(context.Context, *UpdateEmployeeInput) (*CreateEmployeeResponse, error)
 	mustEmbedUnimplementedEmployeesServiceServer()
 }
 
@@ -87,16 +87,16 @@ type EmployeesServiceServer interface {
 type UnimplementedEmployeesServiceServer struct {
 }
 
-func (UnimplementedEmployeesServiceServer) FindById(context.Context, *FindByIdRequest) (*Employee, error) {
+func (UnimplementedEmployeesServiceServer) FindById(context.Context, *FindByIdRequest) (*FindByIdResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method FindById not implemented")
 }
 func (UnimplementedEmployeesServiceServer) Find(context.Context, *Query) (*FindEmployeesPayload, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Find not implemented")
 }
-func (UnimplementedEmployeesServiceServer) Create(context.Context, *CreateEmployeeInput) (*Employee, error) {
+func (UnimplementedEmployeesServiceServer) Create(context.Context, *CreateEmployeeInput) (*CreateEmployeeResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Create not implemented")
 }
-func (UnimplementedEmployeesServiceServer) Update(context.Context, *UpdateEmployeeInput) (*Employee, error) {
+func (UnimplementedEmployeesServiceServer) Update(context.Context, *UpdateEmployeeInput) (*CreateEmployeeResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Update not implemented")
 }
 func (UnimplementedEmployeesServiceServer) mustEmbedUnimplementedEmployeesServiceServer() {}

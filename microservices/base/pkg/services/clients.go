@@ -34,7 +34,7 @@ func (s ClientServer) Create(ctx context.Context, req *pb.CreateClientInput) (*p
 
 	return &pb.CreateClientResponse{
 		Status:   http.StatusCreated,
-		ClientId: client.ClientID,
+		ClientId: client.ClientID.String(),
 	}, nil
 }
 
@@ -49,7 +49,7 @@ func (s ClientServer) FindOne(ctx context.Context, req *pb.FindClientRequest) (*
 
 	return &pb.FindClientResponse{
 		Data: &pb.Client{
-			ClientId:   client.ClientID,
+			ClientId:   client.ClientID.String(),
 			ClientName: client.ClientName,
 			Email:      client.Email,
 			IsUsed:     client.IsUsed,
@@ -70,7 +70,7 @@ func (s ClientServer) FindByEmail(ctx context.Context, req *pb.FindByEmailReques
 
 	return &pb.FindClientResponse{
 		Data: &pb.Client{
-			ClientId:   client.ClientID,
+			ClientId:   client.ClientID.String(),
 			ClientName: client.ClientName,
 			Email:      client.Email,
 			IsUsed:     client.IsUsed,

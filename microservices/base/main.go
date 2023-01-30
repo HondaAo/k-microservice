@@ -33,6 +33,11 @@ func main() {
 	}
 	pb.RegisterClientsServiceServer(grpcServer, &clientServer)
 
+	// employeeServer := services.EmployeeServer{
+	// 	H: h,
+	// }
+	// pb.RegisterEmployeesServiceServer(grpcServer, &employeeServer)
+
 	if err := grpcServer.Serve(lis); err != nil {
 		log.Fatalln("Failed to serve:", err)
 	}

@@ -27,10 +27,10 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
       }),
       inject: [ConfigService],
     }),
-    GraphQLModule.forRootAsync<ApolloDriverConfig>({
+    GraphQLModule.forRootAsync({
       imports: [LoggerModule],
       driver: ApolloDriver,
-      useFactory: async(): Promise<GqlModuleOptions<ApolloDriver>> => ({
+      useFactory: async(): Promise<GqlModuleOptions> => ({
         path: '/',
         typePaths: ['./**/*.graphql'],
         resolvers: {
@@ -68,6 +68,7 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
     SummariesModule,
     HolidayTypesModule,
     EmployeeWorkTermsModule,
+    StampingsModule,
   ],
 })
 export class AppModule {}
